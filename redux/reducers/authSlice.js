@@ -16,7 +16,6 @@ export const autoSignIn = createAsyncThunk(
       const user = await axios.get("/api/user/user");
 
       if (user) {
-        router.push("/");
         return {
           email: user.data.user.email,
           profileImageUrl: user.data.user.profileImageUrl,
