@@ -35,7 +35,7 @@ function SideNav() {
 
   return (
     <div className="bg-semiDarkBlue  py-9 px-8 m-8 rounded-3xl fixed  inset-y-0 transform -translate-x-32  lg:translate-x-0 transition duration-200 ease-in-out">
-      <div className="relative h-full">
+      <div className="relative h-full flex flex-col items-center">
         <div className="group mb-[72px]">
           <svg
             width="32"
