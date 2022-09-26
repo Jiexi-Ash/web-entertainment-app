@@ -4,7 +4,7 @@ import TrendingShow from "./TrendingShow";
 
 function Trending({ trendingShows = [] }) {
   return (
-    <div className=" w-full px-2 py-4  ">
+    <div className="px-2 py-4  ">
       <h1 className="text-[20px] text-white text-left tracking-tighter md:text-[32px]">
         Trending
       </h1>
