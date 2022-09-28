@@ -13,13 +13,13 @@ const handler = nc({
   .use(checkAuth)
   .get(async (req, res) => {
     try {
-      console.log(req.session);
+     
       await connectDB();
       const user = await findUserByEmail(req.session.user.email, {
         password: 0,
       });
 
-      console.log("GET", user);
+     
 
       res.status(200).json({
         message: "User found",

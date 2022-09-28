@@ -1,21 +1,23 @@
 import React from "react";
-import RecommendedShows from "./RecommendedShows/RecommendedShows";
+import ShowsContainer from "./ShowsContainer/ShowsContainer";
 import Trending from "./Trending";
 
-function Shows({ shows = [] }) {
+function Shows({ shows = [], title, isFiltering }) {
   const trendingShows =
     shows && shows.filter((show) => show.isTrending === true);
+ 
 
-  const recommendedShows =
-    shows && shows.filter((show) => show.isTrending === false);
+  const recommendedShows = !isFiltering
+    ? shows && shows.filter((show) => show.isTrending === false)
+    : shows;
 
-  console.log(recommendedShows);
+ 
 
   return (
     <div>
-      <Trending trendingShows={trendingShows} />
+      {!isFiltering && <Trending shows={trendingShows} />}
 
-      <RecommendedShows recommendedShows={recommendedShows} />
+      <ShowsContainer shows={recommendedShows} title={title} />
     </div>
   );
 }

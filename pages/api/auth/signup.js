@@ -4,7 +4,7 @@ import { userExist } from "db/services/user.services";
 import { hashPassword } from "db/utils/tools";
 
 const signup = async (req, res) => {
-  console.log(req.body);
+ 
   if (req.method === "POST") {
     try {
       await connectDB();

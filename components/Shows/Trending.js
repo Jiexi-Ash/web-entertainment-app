@@ -1,8 +1,9 @@
-import React from "react";
+import { useState } from "react";
 import Image from "next/image";
 import TrendingShow from "./TrendingShow";
+import axios from "axios";
 
-function Trending({ trendingShows = [] }) {
+function Trending({ shows = [] }) {
   return (
     <div className="px-2 py-4  ">
       <h1 className="text-[20px] text-white text-left tracking-tighter md:text-[32px]">
@@ -10,9 +11,9 @@ function Trending({ trendingShows = [] }) {
       </h1>
 
       <div className="w-full flex mt-[16px] max-w-[1000px] md:max-w-[2500px]  overflow-x-auto scrollbar-none">
-        {trendingShows &&
-          trendingShows.map((trendingShow) => (
-            <TrendingShow key={trendingShow._id} trendingShow={trendingShow} />
+        {shows &&
+          shows.map((trendingShow) => (
+            <TrendingShow key={trendingShow._id} show={trendingShow} />
           ))}
       </div>
     </div>

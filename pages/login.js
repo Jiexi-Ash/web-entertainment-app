@@ -66,7 +66,7 @@ function Login() {
 
     dispatch(login({ userData, router }));
 
-    console.log(form);
+    
     setError({
       email: "",
       password: "",

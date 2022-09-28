@@ -11,7 +11,7 @@ const initialState = {
 export const autoSignIn = createAsyncThunk(
   "auth/autoSignIn",
   async ({ router }, { dispatch }) => {
-    console.log("autoSignIn");
+  
     try {
       const user = await axios.get("/api/user/user");
 
@@ -22,15 +22,15 @@ export const autoSignIn = createAsyncThunk(
         };
       }
     } catch (error) {
-      console.log("something went wrong");
-      console.log(error);
+      
+     
     }
   }
 );
 export const signUp = createAsyncThunk(
   "auth/signUp",
   async ({ userData, router }, { dispatch, rejectWithValue }) => {
-    console.log(userData);
+    
     try {
       const user = await axios.post("/api/auth/signup", userData);
       await signIn("credentials", {
@@ -49,7 +49,7 @@ export const signUp = createAsyncThunk(
         profileImageUrl: user.data.user.profileImageUrl,
       };
     } catch (e) {
-      console.log(e);
+      
       return rejectWithValue(e.response.data);
     }
   }
@@ -58,7 +58,7 @@ export const signUp = createAsyncThunk(
 export const login = createAsyncThunk(
   "auth/login",
   async ({ userData, router }, { dispatch, rejectWithValue }) => {
-    console.log(userData);
+    
     try {
       const result = await signIn("credentials", {
         email: userData.email,
@@ -77,7 +77,7 @@ export const login = createAsyncThunk(
         profileImageUrl: user.data.user.profileImageUrl,
       };
     } catch (e) {
-      console.log(e);
+      
       return rejectWithValue(e.response.data);
     }
   }

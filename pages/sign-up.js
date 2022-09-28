@@ -92,7 +92,7 @@ function SignUp() {
     };
     dispatch(signUp({ userData, router }));
 
-    console.log(form);
+   
     setError({
       email: "",
       password: "",

@@ -30,7 +30,7 @@ function SideNav() {
     } else if (pathname === "/profile") {
       setSelectedIndex(4);
     }
-    console.log(selectedIndex);
+  
   }, [selectedIndex, pathname]);
 
   return (
