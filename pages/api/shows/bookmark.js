@@ -12,13 +12,10 @@ export default nc({
   .patch(async (req, res) => {
     try {
       await connectDB();
-     
 
       const show = await bookmarkShow(req.body.showID);
 
       res.status(200).json(show);
-
-      // res.status(200).json({ message: "Show bookmarked successfully." });
     } catch (error) {
       res.status(500).json({ error: "Sorry something went wrong." });
     }

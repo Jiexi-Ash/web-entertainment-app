@@ -7,7 +7,7 @@ const importData = async () => {
     await connectDB();
     await Show.deleteMany({});
     await Show.insertMany(showData);
-    console.log("Data Imported!");
+  
 
     process.exit();
   } catch (error) {
@@ -20,7 +20,7 @@ const destroyData = async () => {
   try {
     await connectDB();
     await Show.deleteMany({});
-    console.log("Data Destroyed!");
+   
 
     process.exit();
   } catch (error) {

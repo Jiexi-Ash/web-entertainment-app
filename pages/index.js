@@ -42,7 +42,10 @@ export default function Home({ shows }) {
   return (
     <MainLayout>
       <div className="mt-6 mx-6 mb-9">
-        <Search handleSearch={handleSearch} />
+        <Search
+          handleSearch={handleSearch}
+          placeholder="Search for movies and tv shows"
+        />
 
         <Shows shows={allShows} title={title} isFiltering={isFiltering} />
       </div>

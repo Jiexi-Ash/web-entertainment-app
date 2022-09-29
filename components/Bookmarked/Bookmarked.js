@@ -17,23 +17,18 @@ function Bookmarked({ handleFilter }) {
   const movies =
     bookmarked && bookmarked.filter((show) => show.category === "Movie");
   useEffect(() => {
-    console.log("rendered");
     if (getBookmarkedShows) {
       setBookmarked(getBookmarkedShows);
     }
-    console.log(bookmarked);
   }, []);
 
   const handleSearch = (value) => {
-    console.log("running");
     const filteredShows = bookmarked.filter((show) => {
       return show.title.toLowerCase().includes(value.toLowerCase());
     });
 
-    console.log(filteredShows);
-
     setBookmarked(filteredShows);
-    setTitle(`found ${filteredShows.length} results`);
+    setTitle(`found ${filteredShows.length} results for "${value}"`);
     setIsFilter(true);
 
     if (value === "") {
@@ -42,20 +37,6 @@ function Bookmarked({ handleFilter }) {
       setTitle("Bookmarked shows");
     }
   };
-
-  //   const handleSearch = (value) => {
-  //     const filteredMovies = movies.filter((movie) => {
-  //       return movie.title.toLowerCase().includes(value.toLowerCase());
-  //     });
-
-  //     setMovies(filteredMovies);
-  //     setTitle(`found ${filteredMovies.length} results`);
-
-  //     if (value === "") {
-  //       setMovies(getMovies);
-  //       setTitle("Movies");
-  //     }
-  //   };
 
   return (
     <>

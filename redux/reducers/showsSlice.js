@@ -17,11 +17,11 @@ const showSlice = createSlice({
     },
 
     setMovies(state, action) {
-      // add movies object to shows array
+      
       state.movies = action.payload;
     },
     setSeries(state, action) {
-      // add series object to shows array
+      
       state.series = action.payload;
     },
     setBookmarked(state, action) {

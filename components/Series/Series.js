@@ -20,7 +20,7 @@ function Series() {
     });
 
     setTvShows(filteredSeries);
-    setTitle(`found ${filteredSeries.length} results`);
+    setTitle(`found ${filteredSeries.length} results for ${value}`);
 
     if (value === "") {
       setTvShows(series);

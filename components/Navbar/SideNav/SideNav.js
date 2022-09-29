@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { signOutUser } from "redux/reducers/authSlice";
 import Image from "next/image";
 import Link from "next/link";
 import HomeIcon from "public/assets/icon-nav-home.svg";
@@ -9,8 +11,9 @@ import BookmarkedIcon from "public/assets/icon-nav-bookmark.svg";
 import SideNavItem from "./SideNavItem";
 
 function SideNav() {
+  const dispatch = useDispatch();
   const [selectedIndex, setSelectedIndex] = useState(0);
-  // get the current route
+
   const router = useRouter();
   const { pathname } = router;
 
@@ -30,7 +33,6 @@ function SideNav() {
     } else if (pathname === "/profile") {
       setSelectedIndex(4);
     }
-  
   }, [selectedIndex, pathname]);
 
   return (
@@ -92,6 +94,23 @@ function SideNav() {
         <div className="absolute bottom-0">
           <div className="relative  w-10 h-10  rounded-full border border-white">
             <Image src="/assets/image-avatar.png" layout="fill" alt="avatar" />
+          </div>
+          <div
+            className="flex justify-center mt-10 cursor-pointer group"
+            onClick={() => dispatch(signOutUser())}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              class="w-10 h-10 stroke-current  text-white/50 group-hover:text-white"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
+              />
+            </svg>
           </div>
         </div>
       </div>

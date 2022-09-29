@@ -11,7 +11,6 @@ const initialState = {
 export const autoSignIn = createAsyncThunk(
   "auth/autoSignIn",
   async ({ router }, { dispatch }) => {
-  
     try {
       const user = await axios.get("/api/user/user");
 
@@ -21,16 +20,12 @@ export const autoSignIn = createAsyncThunk(
           profileImageUrl: user.data.user.profileImageUrl,
         };
       }
-    } catch (error) {
-      
-     
-    }
+    } catch (error) {}
   }
 );
 export const signUp = createAsyncThunk(
   "auth/signUp",
   async ({ userData, router }, { dispatch, rejectWithValue }) => {
-    
     try {
       const user = await axios.post("/api/auth/signup", userData);
       await signIn("credentials", {
@@ -49,7 +44,6 @@ export const signUp = createAsyncThunk(
         profileImageUrl: user.data.user.profileImageUrl,
       };
     } catch (e) {
-      
       return rejectWithValue(e.response.data);
     }
   }
@@ -58,7 +52,6 @@ export const signUp = createAsyncThunk(
 export const login = createAsyncThunk(
   "auth/login",
   async ({ userData, router }, { dispatch, rejectWithValue }) => {
-    
     try {
       const result = await signIn("credentials", {
         email: userData.email,
@@ -77,7 +70,6 @@ export const login = createAsyncThunk(
         profileImageUrl: user.data.user.profileImageUrl,
       };
     } catch (e) {
-      
       return rejectWithValue(e.response.data);
     }
   }
@@ -86,7 +78,13 @@ export const login = createAsyncThunk(
 const authReducer = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    signOutUser: (state) => {
+      state.user = null;
+      state.authenticated = false;
+      signOut();
+    },
+  },
   extraReducers: {
     [signUp.pending]: (state) => {
       state.loading = true;
@@ -123,5 +121,7 @@ const authReducer = createSlice({
     },
   },
 });
+
+export const { signOutUser } = authReducer.actions;
 
 export default authReducer.reducer;

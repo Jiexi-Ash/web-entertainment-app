@@ -37,18 +37,18 @@ function SignUp() {
   };
   const handleEmailChange = (e) => {
     setForm({ ...form, email: e.target.value });
-    // clear error
+    
     setError({ ...error, email: "" });
   };
 
   const handlePasswordChange = (e) => {
     setForm({ ...form, password: e.target.value });
-    // clear error
+    
     setError({ ...error, password: "" });
   };
   const handleRepeatPasswordChange = (e) => {
     setForm({ ...form, repeatPassword: e.target.value });
-    // clear error
+    
     setError({ ...error, repeatPassword: "" });
   };
   const handleSubmit = (e) => {
@@ -98,11 +98,7 @@ function SignUp() {
       password: "",
       repeatPassword: "",
     });
-    // setForm({
-    //   email: "",
-    //   password: "",
-    //   repeatPassword: "",
-    // });
+  
   };
   return (
     <>

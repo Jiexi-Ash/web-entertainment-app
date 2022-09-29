@@ -32,13 +32,13 @@ function Login() {
 
   const handleEmailChange = (e) => {
     setForm({ ...form, email: e.target.value });
-    // clear error
+    
     setError({ ...error, email: "" });
   };
 
   const handlePasswordChange = (e) => {
     setForm({ ...form, password: e.target.value });
-    // clear error
+    
     setError({ ...error, password: "" });
   };
   const handleSubmit = (e) => {

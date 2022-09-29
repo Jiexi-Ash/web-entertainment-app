@@ -1,8 +1,40 @@
-import React from "react";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { signOutUser } from "redux/reducers/authSlice";
 import Image from "next/image";
+import HomeIcon from "public/assets/icon-nav-home.svg";
+import MoviesIcon from "public/assets/icon-nav-movies.svg";
+import TvIcon from "public/assets/icon-nav-tv-series.svg";
+import BookmarkedIcon from "public/assets/icon-nav-bookmark.svg";
+import SideNavItem from "./SideNav/SideNavItem";
+import NavItem from "./NavItem";
 
 function Navbar() {
+  const dispatch = useDispatch();
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const router = useRouter();
+  const { pathname } = router;
+
+  const handleSelectedIndex = (index) => {
+    setSelectedIndex(index);
+  };
+
+  useEffect(() => {
+    if (pathname === "/") {
+      setSelectedIndex(0);
+    } else if (pathname === "/movies") {
+      setSelectedIndex(1);
+    } else if (pathname === "/tv-series") {
+      setSelectedIndex(2);
+    } else if (pathname === "/bookmarked") {
+      setSelectedIndex(3);
+    } else if (pathname === "/profile") {
+      setSelectedIndex(4);
+    }
+  }, [selectedIndex, pathname]);
   return (
     <header className="bg-semiDarkBlue py-[18px] px-4 md:m-6 md:rounded-md lg:hidden">
       <div className="flex justify-between items-center">
@@ -15,8 +47,8 @@ function Navbar() {
           </svg>
         </div>
         <nav>
-          <ul className="flex items-center">
-            <li className="mr-6">
+          <ul className="flex items-center justify-center space-x-6">
+            {/* <li className="mr-6">
               <Link href="/">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -25,50 +57,63 @@ function Navbar() {
                   <path d="M8 0H1C.4 0 0 .4 0 1v7c0 .6.4 1 1 1h7c.6 0 1-.4 1-1V1c0-.6-.4-1-1-1Zm0 11H1c-.6 0-1 .4-1 1v7c0 .6.4 1 1 1h7c.6 0 1-.4 1-1v-7c0-.6-.4-1-1-1ZM19 0h-7c-.6 0-1 .4-1 1v7c0 .6.4 1 1 1h7c.6 0 1-.4 1-1V1c0-.6-.4-1-1-1Zm0 11h-7c-.6 0-1 .4-1 1v7c0 .6.4 1 1 1h7c.6 0 1-.4 1-1v-7c0-.6-.4-1-1-1Z" />
                 </svg>
               </Link>
-            </li>
-            <li className="mr-6">
-              <Link href="/">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="fill-current w-5 h-5 text-grayishBlue hover:fill-current hover:text-white group-hover:cursor-pointer transition-all duration-200 ease-in"
-                >
-                  <path
-                    d="M16.956 0H3.044A3.044 3.044 0 0 0 0 3.044v13.912A3.044 3.044 0 0 0 3.044 20h13.912A3.044 3.044 0 0 0 20 16.956V3.044A3.044 3.044 0 0 0 16.956 0ZM4 9H2V7h2v2Zm-2 2h2v2H2v-2Zm16-2h-2V7h2v2Zm-2 2h2v2h-2v-2Zm2-8.26V4h-2V2h1.26a.74.74 0 0 1 .74.74ZM2.74 2H4v2H2V2.74A.74.74 0 0 1 2.74 2ZM2 17.26V16h2v2H2.74a.74.74 0 0 1-.74-.74Zm16 0a.74.74 0 0 1-.74.74H16v-2h2v1.26Z"
-                    fill="#5A698F"
-                  />
-                </svg>
-              </Link>
-            </li>
-            <li className="mr-6">
-              <Link href="/">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="fill-current w-5 h-5 text-grayishBlue hover:fill-current hover:text-white group-hover:cursor-pointer transition-all duration-200 ease-in"
-                >
-                  <path
-                    d="M20 4.481H9.08l2.7-3.278L10.22 0 7 3.909 3.78.029 2.22 1.203l2.7 3.278H0V20h20V4.481Zm-8 13.58H2V6.42h10v11.64Zm5-3.88h-2v-1.94h2v1.94Zm0-3.88h-2V8.36h2v1.94Z"
-                    fill="#5A698F"
-                  />
-                </svg>
-              </Link>
-            </li>
-            <li className="">
-              <Link href="/">
-                <svg
-                  className="fill-current w-5 h-5 text-grayishBlue hover:fill-current hover:text-white group-hover:cursor-pointer transition-all duration-200 ease-in"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M15.387 0c.202 0 .396.04.581.119.291.115.522.295.694.542.172.247.258.52.258.82v17.038c0 .3-.086.573-.258.82a1.49 1.49 0 0 1-.694.542 1.49 1.49 0 0 1-.581.106c-.423 0-.79-.141-1.098-.423L8.46 13.959l-5.83 5.605c-.317.29-.682.436-1.097.436-.202 0-.396-.04-.581-.119a1.49 1.49 0 0 1-.694-.542A1.402 1.402 0 0 1 0 18.52V1.481c0-.3.086-.573.258-.82A1.49 1.49 0 0 1 .952.119C1.137.039 1.33 0 1.533 0h13.854Z"
-                    fill="#5A698F"
-                  />
-                </svg>
-              </Link>
-            </li>
+            </li> */}
+            <NavItem
+              path="/"
+              index={0}
+              selectedIndex={selectedIndex}
+              handleSelect={handleSelectedIndex}
+              src="/assets/icon-nav-home.svg"
+              alt="home"
+              Icon={HomeIcon}
+            />
+            <NavItem
+              path="/movies"
+              index={1}
+              selectedIndex={selectedIndex}
+              handleSelect={handleSelectedIndex}
+              src="/assets/icon-nav-home.svg"
+              alt="movies"
+              Icon={MoviesIcon}
+            />
+            <NavItem
+              path="/tv-series"
+              index={2}
+              selectedIndex={selectedIndex}
+              handleSelect={handleSelectedIndex}
+              src="/assets/icon-nav-home.svg"
+              alt="tv-series"
+              Icon={TvIcon}
+            />
+            <NavItem
+              path="/bookmarked"
+              index={3}
+              selectedIndex={selectedIndex}
+              handleSelect={handleSelectedIndex}
+              src="/assets/icon-nav-home.svg"
+              alt="bookmarked"
+              Icon={BookmarkedIcon}
+            />
           </ul>
         </nav>
-        <div className="relative w-6 h-6  rounded-full border border-white">
-          <Image src="/assets/image-avatar.png" layout="fill" alt="avatar" />
+        <div className="flex items-center space-x-4">
+          <div className="relative w-6 h-6  rounded-full border border-white">
+            <Image src="/assets/image-avatar.png" layout="fill" alt="avatar" />
+          </div>
+          <div className="" onClick={() => dispatch(signOutUser())}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              class="w-6 h-6 stroke-current  text-white group-hover:text-white"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
+              />
+            </svg>
+          </div>
         </div>
       </div>
     </header>

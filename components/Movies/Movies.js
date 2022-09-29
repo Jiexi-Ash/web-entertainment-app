@@ -20,7 +20,7 @@ function Movies() {
     });
 
     setMovies(filteredMovies);
-    setTitle(`found ${filteredMovies.length} results`);
+    setTitle(`found ${filteredMovies.length} results for ${value}`);
 
     if (value === "") {
       setMovies(getMovies);

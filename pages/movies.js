@@ -11,38 +11,19 @@ import ShowsContainer from "components/Shows/ShowsContainer/ShowsContainer";
 import Movies from "components/Movies/Movies";
 
 function MoviesPage({ shows }) {
-  // inputref
+
   const inputRef = useRef(null);
   const [isFilter, setIsFilter] = useState(false);
   const [title, setTitle] = useState("Movies");
   const [value, setValue] = useState("");
-  // const [movies, setMovies] = useState(shows);
+  
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(setMovies(shows));
   }, []);
 
-  // const handleSearch = (e) => {
-  //   e.preventDefault();
-  //   const inputValue = inputRef.current.value.toLowerCase();
 
-  //   if (inputValue.length > 0) {
-  //     setIsFilter(true);
-  //     const filteredMovies = movies.filter((movie) => {
-  //       return movie.title.toLowerCase().includes(inputValue);
-  //     });
-
-  //     setMovies(filteredMovies);
-
-  //     setTitle(`Found ${filteredMovies.length} results for "${inputValue}"`);
-  //   }
-
-  //   if (inputValue === "") {
-  //     setMovies(shows);
-  //     setTitle("Movies");
-  //   }
-  // };
 
   return (
     <MainLayout>

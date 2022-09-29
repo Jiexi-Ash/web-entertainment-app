@@ -1,6 +1,6 @@
 import React from "react";
 import RouteGuard from "helpers/RouteGuard";
-import SideNav from "components/SideNav/SideNav";
+import SideNav from "components/Navbar/SideNav/SideNav";
 import Navbar from "components/Navbar/Navbar";
 
 function MainLayout({ children }) {
