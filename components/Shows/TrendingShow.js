@@ -11,7 +11,6 @@ import axios from "axios";
 
 function TrendingShow({ show = {} }) {
   const [trendingShow, setTrendingShow] = useState(show);
-  
 
   const thumbnail = trendingShow.thumbnail.trending.small;
 
@@ -30,7 +29,7 @@ function TrendingShow({ show = {} }) {
 
   return (
     <div className="relative flex-shrink-0  w-full h-[140px] group max-w-[240px] mr-4 md:max-w-[470px] md:h-[230px]  rounded-md">
-      <div class="hidden absolute z-30  top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-2 group-hover:block ">
+      <div className="hidden absolute z-30  top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-2 group-hover:block ">
         <div className="flex space-x-2 items-center  w-[117px] h-[48px] rounded-full bg-white/25 p-2">
           <PlayIcon className="w-8 h-8 text-white" />
           <span className="text-[18px] text-white font-medium">Play</span>

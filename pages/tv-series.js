@@ -1,14 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import ShowsContainer from "components/Shows/ShowsContainer/ShowsContainer";
 import MainLayout from "components/UI/MainLayout";
 import connectDB from "db/connectDB";
 import { getTvSeries } from "db/services/shows.services";
 import { toJSON } from "toJSON";
 import SearchIcon from "public/assets/icon-search.svg";
+import { setSeries } from "redux/reducers/showsSlice";
+import Series from "components/Series/Series";
 
 function TVSeries({ tvSeries }) {
+  const dispatch = useDispatch();
   const [value, setValue] = useState("");
-  const [series, setSeries] = useState(tvSeries);
+  // const [series, setSeries] = useState(tvSeries);
 
   const handleSearch = (e) => {
     setValue(e.target.value.toLowerCase());
@@ -24,10 +28,14 @@ function TVSeries({ tvSeries }) {
     }
   };
 
+  useEffect(() => {
+    dispatch(setSeries(tvSeries));
+  }, []);
+
   return (
     <MainLayout>
       <div className="mt-6 mx-6 mb-9">
-        <div className="w-full md:max-w-[400px]">
+        {/* <div className="w-full md:max-w-[400px]">
           <form>
             <div className="relative flex items-center ">
               <SearchIcon className="absolute top-3 left-0  text-white md:top-5 md:left-0 " />
@@ -40,8 +48,8 @@ function TVSeries({ tvSeries }) {
               />
             </div>
           </form>
-        </div>
-        <ShowsContainer shows={series} title="TV Series" />
+        </div> */}
+        <Series />
       </div>
     </MainLayout>
   );

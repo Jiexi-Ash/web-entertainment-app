@@ -1,11 +1,12 @@
-import React from "react";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import BookmarkIconFull from "public/assets/icon-bookmark-full.svg";
 import BookmarkIconEmpty from "public/assets/icon-bookmark-empty.svg";
 import MovieIcon from "public/assets/icon-category-movie.svg";
 import Image from "next/image";
 import Show from "./Show";
 
-function ShowsContainer({ shows = [], title }) {
+function ShowsContainer({ shows = [], title, type }) {
   return (
     <div>
       <h1 className="text-[20px] text-white tracking-tighter md:text-[32px]">
