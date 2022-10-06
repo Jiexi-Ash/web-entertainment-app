@@ -33,7 +33,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [solution URL]([https://your-solution-url.com](https://www.frontendmentor.io/solutions/webentertainmentapp-created-using-nextjs-and-tailwind-css-pGJcFbzz_L))
-- Live Site URL: [live site URL]([https://your-live-site-url.com](https://web-entertainment-app.vercel.app/)
+- Live Site URL: [live site URL]([https://your-live-site-url.com](https://web-entertainment-app.vercel.app/])
 
 ## My process
 
