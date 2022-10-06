@@ -135,7 +135,10 @@ function Login() {
                 </p>
               )}
 
-              <button className="btn" disabled={loading}>
+              <button
+                className="btn disabled:bg-primaryRed disabled:cursor-not-allowed"
+                disabled={loading}
+              >
                 {loading ? <Loader /> : "Login to your account"}
               </button>
               <div className="mt-6 " onClick={handleRoute}>

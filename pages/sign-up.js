@@ -164,7 +164,7 @@ function SignUp() {
                   {error}
                 </p>
               )}
-              <button className="btn">
+              <button className="btn disabled:bg-primaryRed disabled:cursor-not-allowed">
                 {loading ? <Loader /> : "Create an account"}
               </button>
               <div className="mt-6" onClick={handleRoute}>
