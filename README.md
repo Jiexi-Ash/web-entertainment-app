@@ -32,7 +32,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [solution URL]([https://your-solution-url.com](https://www.frontendmentor.io/solutions/webentertainmentapp-created-using-nextjs-and-tailwind-css-pGJcFbzz_L))
+- Solution URL: https://your-solution-url.com](https://www.frontendmentor.io/solutions/webentertainmentapp-created-using-nextjs-and-tailwind-css-pGJcFbzz_L
 - Live Site URL: https://web-entertainment-app.vercel.app
 
 ## My process
@@ -50,7 +50,7 @@ Users should be able to:
 
 ## Author
 
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
+- Frontend Mentor - [@Jiexi-Ash](https://www.frontendmentor.io/profile/Jiexi-Ash)
 
 ## Getting Started
 
