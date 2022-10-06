@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { signOutUser } from "redux/reducers/authSlice";
 import Image from "next/image";
-import Link from "next/link";
 import HomeIcon from "public/assets/icon-nav-home.svg";
 import MoviesIcon from "public/assets/icon-nav-movies.svg";
 import TvIcon from "public/assets/icon-nav-tv-series.svg";

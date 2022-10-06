@@ -6,6 +6,7 @@ const initialState = {
   user: null,
   authenticated: false,
   loading: false,
+  error: false,
 };
 
 export const autoSignIn = createAsyncThunk(
@@ -44,7 +45,7 @@ export const signUp = createAsyncThunk(
         profileImageUrl: user.data.user.profileImageUrl,
       };
     } catch (e) {
-      return rejectWithValue(e.response.data);
+      return rejectWithValue("incorrect email or password");
     }
   }
 );
@@ -70,7 +71,7 @@ export const login = createAsyncThunk(
         profileImageUrl: user.data.user.profileImageUrl,
       };
     } catch (e) {
-      return rejectWithValue(e.response.data);
+      return rejectWithValue("incorrect email or password");
     }
   }
 );
@@ -93,9 +94,11 @@ const authReducer = createSlice({
       state.loading = false;
       state.authenticated = true;
       state.user = action.payload;
+      state.error = "";
     },
-    [signUp.rejected]: (state) => {
+    [signUp.rejected]: (state, action) => {
       state.loading = false;
+      state.error = action.payload;
     },
     [login.pending]: (state) => {
       state.loading = true;
@@ -105,19 +108,23 @@ const authReducer = createSlice({
       state.authenticated = true;
       state.user = action.payload;
     },
-    [login.rejected]: (state) => {
+    [login.rejected]: (state, action) => {
       state.loading = false;
+      state.error = action.payload;
     },
     [autoSignIn.pending]: (state) => {
       state.loading = true;
+      state.error;
     },
     [autoSignIn.fulfilled]: (state, action) => {
       state.authenticated = true;
       state.user = action.payload;
       state.loading = false;
+      state.error;
     },
-    [autoSignIn.rejected]: (state) => {
+    [autoSignIn.rejected]: (state, action) => {
       state.loading = false;
+      state.error = true;
     },
   },
 });

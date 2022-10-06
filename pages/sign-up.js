@@ -6,11 +6,13 @@ import { signUp } from "redux/reducers/authSlice";
 import Loader from "components/UI/Loader";
 
 function SignUp() {
+  const loading = useSelector((state) => state.auth.loading);
+  const error = useSelector((state) => state.auth.error);
   const dispatch = useDispatch();
   const router = useRouter();
   const [isSessionCheck, setIsSessionCheck] = useState(true);
-  const [error, setError] = useState({
-    error: {
+  const [formError, setFormError] = useState({
+    formError: {
       email: "",
       password: "",
       repeatPassword: "",
@@ -37,25 +39,25 @@ function SignUp() {
   };
   const handleEmailChange = (e) => {
     setForm({ ...form, email: e.target.value });
-    
-    setError({ ...error, email: "" });
+
+    setFormError({ ...formError, email: "" });
   };
 
   const handlePasswordChange = (e) => {
     setForm({ ...form, password: e.target.value });
-    
-    setError({ ...error, password: "" });
+
+    setFormError({ ...formError, password: "" });
   };
   const handleRepeatPasswordChange = (e) => {
     setForm({ ...form, repeatPassword: e.target.value });
-    
-    setError({ ...error, repeatPassword: "" });
+
+    setFormError({ ...formError, repeatPassword: "" });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
     if (form.email === "") {
-      setError({
-        ...error,
+      setFormError({
+        ...formError,
         email: "Can't be empty",
       });
 
@@ -63,24 +65,24 @@ function SignUp() {
     }
 
     if (form.password === "") {
-      setError({
-        ...error,
+      setFormError({
+        ...formError,
         password: "Can't be empty",
       });
       return;
     }
 
     if (form.repeatPassword === "") {
-      setError({
-        ...error,
+      setFormError({
+        ...formError,
         repeatPassword: "Can't be empty",
       });
       return;
     }
 
     if (form.password !== form.repeatPassword) {
-      setError({
-        ...error,
+      setFormError({
+        ...formError,
         repeatPassword: "Passwords don't match",
       });
       return;
@@ -92,13 +94,11 @@ function SignUp() {
     };
     dispatch(signUp({ userData, router }));
 
-   
-    setError({
+    setFormError({
       email: "",
       password: "",
       repeatPassword: "",
     });
-  
   };
   return (
     <>
@@ -125,9 +125,9 @@ function SignUp() {
                   value={form.email}
                   onChange={handleEmailChange}
                 />
-                {error.email && (
+                {formError.email && (
                   <p className="absolute top-3 right-0 text-primaryRed text-bodyM font-light">
-                    {error.email}
+                    {formError.email}
                   </p>
                 )}
               </div>
@@ -139,9 +139,9 @@ function SignUp() {
                   value={form.password}
                   onChange={handlePasswordChange}
                 />
-                {error.password && (
+                {formError.password && (
                   <p className="absolute top-3 right-0 text-primaryRed text-bodyM font-light">
-                    {error.password}
+                    {formError.password}
                   </p>
                 )}
               </div>
@@ -153,14 +153,20 @@ function SignUp() {
                   value={form.repeatPassword}
                   onChange={handleRepeatPasswordChange}
                 />
-                {error.repeatPassword && (
+                {formError.repeatPassword && (
                   <p className="absolute top-3 right-0 text-primaryRed text-bodyM font-light">
-                    {error.repeatPassword}
+                    {formError.repeatPassword}
                   </p>
                 )}
               </div>
-
-              <button className="btn">Create an account</button>
+              {error && (
+                <p className="text-primaryRed text-bodyM font-light mb-6 italic">
+                  {error}
+                </p>
+              )}
+              <button className="btn">
+                {loading ? <Loader /> : "Create an account"}
+              </button>
               <div className="mt-6" onClick={handleRoute}>
                 <p className="text-bodyM text-white text-center  cursor-pointer">
                   {"Already have an account?"}

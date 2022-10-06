@@ -1,7 +1,4 @@
-import { useState } from "react";
-import Image from "next/image";
 import TrendingShow from "./TrendingShow";
-import axios from "axios";
 
 function Trending({ shows = [] }) {
   return (

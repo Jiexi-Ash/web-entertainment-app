@@ -13,7 +13,8 @@ This is a solution to the [Entertainment web app challenge on Frontend Mentor](h
 - [My process](#my-process)
   - [Built with](#built-with)
 - [Author](#author)
-
+- [Getting Started](#getting-started)
+- [Learn More](#learn-more)
 
 ## Overview
 
@@ -28,7 +29,6 @@ Users should be able to:
 - Search for relevant shows on all pages
 - **Bonus**: Build this project as a full-stack application
 - **Bonus**: If you're building a full-stack app, we provide authentication screen (sign-up/login) designs if you'd like to create an auth flow
-
 
 ### Links
 
@@ -84,5 +84,3 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
-

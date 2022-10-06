@@ -1,34 +1,24 @@
 import MainLayout from "components/UI/MainLayout";
-import { useEffect, useState, useRef } from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setMovies } from "redux/reducers/showsSlice";
-
-import SearchIcon from "public/assets/icon-search.svg";
-import connectDB from "db/connectDB";
 import { getMovies } from "db/services/shows.services";
+import connectDB from "db/connectDB";
 import { toJSON } from "toJSON";
-import ShowsContainer from "components/Shows/ShowsContainer/ShowsContainer";
 import Movies from "components/Movies/Movies";
 
-function MoviesPage({ shows }) {
-
-  const inputRef = useRef(null);
-  const [isFilter, setIsFilter] = useState(false);
-  const [title, setTitle] = useState("Movies");
-  const [value, setValue] = useState("");
-  
+function MoviesPage({ shows, error }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(setMovies(shows));
   }, []);
 
-
-
   return (
     <MainLayout>
       <div className="mt-6 mx-6 mb-9">
-        <Movies />
+        {!error && <Movies />}
+        {error && <p className="text-center">{error}</p>}
       </div>
     </MainLayout>
   );
@@ -46,5 +36,12 @@ export const getStaticProps = async () => {
         shows: toJSON(shows),
       },
     };
-  } catch (error) {}
+  } catch (error) {
+    return {
+      props: {
+        error: "Something went wrong",
+        shows: [],
+      },
+    };
+  }
 };

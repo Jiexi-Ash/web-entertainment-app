@@ -1,17 +1,15 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import MainLayout from "components/UI/MainLayout";
 import { getShows } from "db/services/shows.services";
 import connectDB from "db/connectDB";
 import { toJSON } from "toJSON";
 import Shows from "components/Shows/Shows";
-import SearchIcon from "public/assets/icon-search.svg";
 import { setShows } from "redux/reducers/showsSlice";
 import Search from "components/Search";
 
-export default function Home({ shows }) {
+export default function Home({ shows, error }) {
   const dispatch = useDispatch();
-  const inputRef = useRef(null);
   const [title, setTitle] = useState("Recommended Shows");
   const [isFiltering, setIsFiltering] = useState(false);
   const [allShows, setAllShows] = useState(shows);
@@ -47,7 +45,11 @@ export default function Home({ shows }) {
           placeholder="Search for movies and tv shows"
         />
 
-        <Shows shows={allShows} title={title} isFiltering={isFiltering} />
+        {!error && (
+          <Shows shows={allShows} title={title} isFiltering={isFiltering} />
+        )}
+
+        {error && <p className="text-center">{error}</p>}
       </div>
     </MainLayout>
   );
@@ -63,5 +65,12 @@ export async function getStaticProps() {
         shows: toJSON(shows),
       },
     };
-  } catch (error) {}
+  } catch (error) {
+    return {
+      props: {
+        error: "Something went wrong",
+        shows: [],
+      },
+    };
+  }
 }

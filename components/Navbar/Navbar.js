@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { signOutUser } from "redux/reducers/authSlice";
 import Image from "next/image";
+
 import HomeIcon from "public/assets/icon-nav-home.svg";
 import MoviesIcon from "public/assets/icon-nav-movies.svg";
 import TvIcon from "public/assets/icon-nav-tv-series.svg";
 import BookmarkedIcon from "public/assets/icon-nav-bookmark.svg";
-import SideNavItem from "./SideNav/SideNavItem";
 import NavItem from "./NavItem";
 
 function Navbar() {

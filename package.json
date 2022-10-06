@@ -6,11 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "data:import": "node seeder.mjs",
-    "data:destroy": "node seeder.mjs -d"
+    "lint": "next lint"
   },
   "dependencies": {
+    "@formkit/auto-animate": "^1.0.0-beta.3",
     "@reduxjs/toolkit": "^1.8.5",
     "axios": "^0.27.2",
     "bcryptjs": "^2.4.3",
@@ -21,6 +20,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-redux": "^8.0.2",
+    "react-toastify": "^9.0.8",
     "validator": "^13.7.0"
   },
   "devDependencies": {

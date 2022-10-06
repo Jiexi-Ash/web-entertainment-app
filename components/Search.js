@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import SearchIcon from "public/assets/icon-search.svg";
 
 function Search({ handleSearch, placeholder }) {

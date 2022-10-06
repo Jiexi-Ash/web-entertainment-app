@@ -1,9 +1,13 @@
 import Search from "components/Search";
-import Show from "components/Shows/ShowsContainer/Show";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { bookmarkedShows } from "redux/reducers/showsSlice";
+import axios from "axios";
+import BookmarkedShows from "./BookmarkedShows";
 
-function Bookmarked({ handleFilter }) {
+function Bookmarked() {
+  const dispatch = useDispatch();
+
   const [isFilter, setIsFilter] = useState(false);
   const [title, setTitle] = useState("Bookmarked shows");
   const [bookmarked, setBookmarked] = useState([]);
@@ -20,7 +24,7 @@ function Bookmarked({ handleFilter }) {
     if (getBookmarkedShows) {
       setBookmarked(getBookmarkedShows);
     }
-  }, []);
+  }, [getBookmarkedShows]);
 
   const handleSearch = (value) => {
     const filteredShows = bookmarked.filter((show) => {
@@ -33,9 +37,23 @@ function Bookmarked({ handleFilter }) {
 
     if (value === "") {
       setIsFilter(false);
+      dispatch(bookmarkedShows());
       setBookmarked(getBookmarkedShows);
+
       setTitle("Bookmarked shows");
     }
+  };
+
+  const handleBookmark = async (showID) => {
+    await axios.patch("/api/shows/bookmark", {
+      showID: showID,
+    });
+
+    const filteredShows = bookmarked.filter((show) => {
+      return show._id !== showID;
+    });
+
+    setBookmarked(filteredShows);
   };
 
   return (
@@ -46,41 +64,24 @@ function Bookmarked({ handleFilter }) {
       />
       {!isFilter && (
         <>
-          <div className="mb-12">
-            <h2 className="text-[20px] text-white tracking-tighter md:text-[32px]">
-              Bookmarked Movies
-            </h2>
-            <div className="grid grid-cols-2 gap-4 mt-6  md:grid-cols-3 md:gap-[29px] lg:grid-cols-4 lg:gap-10 xl:grid-cols-6">
-              {/* map all tv series */}
-              {movies &&
-                movies.map((show) => <Show key={show._id} show={show} />)}
-            </div>
-          </div>
-          <div className="flex flex-col space-y-4">
-            <div className="mb-12">
-              <h2 className="text-[20px] text-white tracking-tighter md:text-[32px]">
-                TV Shows
-              </h2>
-              <div className="grid grid-cols-2 gap-4 mt-6  md:grid-cols-3 md:gap-[29px] lg:grid-cols-4 lg:gap-10 xl:grid-cols-6">
-                {tvSeries &&
-                  tvSeries.map((show) => <Show key={show._id} show={show} />)}
-              </div>
-            </div>
-          </div>
+          <BookmarkedShows
+            shows={movies}
+            title="Bookmarked Movies"
+            handleBookmark={handleBookmark}
+          />
+          <BookmarkedShows
+            shows={tvSeries}
+            handleBookmark={handleBookmark}
+            title="TV shows"
+          />
         </>
       )}
       {isFilter && (
-        <div className="flex flex-col space-y-4">
-          <div className="mb-12">
-            <h2 className="text-[20px] text-white tracking-tighter md:text-[32px]">
-              {title}
-            </h2>
-            <div className="grid grid-cols-2 gap-4 mt-6  md:grid-cols-3 md:gap-[29px] lg:grid-cols-4 lg:gap-10 xl:grid-cols-6">
-              {bookmarked &&
-                bookmarked.map((show) => <Show key={show._id} show={show} />)}
-            </div>
-          </div>
-        </div>
+        <BookmarkedShows
+          shows={bookmarked}
+          title={title}
+          handleBookmark={handleBookmark}
+        />
       )}
     </>
   );

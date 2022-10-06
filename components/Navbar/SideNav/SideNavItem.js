@@ -1,7 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import HomeIcon from "public/assets/icon-nav-home.svg";
-import Image from "next/image";
 
 function SideNavItem({ index, path, selectedIndex, handleSelect, alt, Icon }) {
   return (

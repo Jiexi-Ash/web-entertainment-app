@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { getSession } from "next-auth/react";
 import Loader from "components/UI/Loader";
@@ -6,11 +7,14 @@ import { useDispatch } from "react-redux";
 import { login } from "redux/reducers/authSlice";
 
 function Login() {
+  const loading = useSelector((state) => state.auth.loading);
+  const error = useSelector((state) => state.auth.error);
   const dispatch = useDispatch();
   const [isSessionCheck, setIsSessionCheck] = useState(true);
   const router = useRouter();
-  const [error, setError] = useState({
-    error: {
+
+  const [formError, setFormError] = useState({
+    formError: {
       email: "",
       password: "",
     },
@@ -32,20 +36,20 @@ function Login() {
 
   const handleEmailChange = (e) => {
     setForm({ ...form, email: e.target.value });
-    
-    setError({ ...error, email: "" });
+
+    setFormError({ ...formError, email: "" });
   };
 
   const handlePasswordChange = (e) => {
     setForm({ ...form, password: e.target.value });
-    
-    setError({ ...error, password: "" });
+
+    setFormError({ ...formError, password: "" });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
     if (form.email === "") {
-      setError({
-        ...error,
+      setFormError({
+        ...formError,
         email: "Can't be empty",
       });
 
@@ -53,8 +57,8 @@ function Login() {
     }
 
     if (form.password === "") {
-      setError({
-        ...error,
+      setFormError({
+        ...formError,
         password: "Can't be empty",
       });
       return;
@@ -66,8 +70,7 @@ function Login() {
 
     dispatch(login({ userData, router }));
 
-    
-    setError({
+    setFormError({
       email: "",
       password: "",
     });
@@ -105,9 +108,9 @@ function Login() {
                   value={form.email}
                   onChange={handleEmailChange}
                 />
-                {error.email && (
+                {formError.email && (
                   <p className="absolute top-3 right-0 text-primaryRed text-bodyM font-light">
-                    {error.email}
+                    {formError.email}
                   </p>
                 )}
               </div>
@@ -119,14 +122,22 @@ function Login() {
                   value={form.password}
                   onChange={handlePasswordChange}
                 />
-                {error.password && (
+                {formError.password && (
                   <p className="absolute top-3 right-0 text-primaryRed text-bodyM font-light">
-                    {error.password}
+                    {formError.password}
                   </p>
                 )}
               </div>
 
-              <button className="btn">Login to your account</button>
+              {error && (
+                <p className="text-primaryRed text-bodyM font-light mb-6 italic">
+                  {error}
+                </p>
+              )}
+
+              <button className="btn" disabled={loading}>
+                {loading ? <Loader /> : "Login to your account"}
+              </button>
               <div className="mt-6 " onClick={handleRoute}>
                 <p className="text-bodyM text-white text-center cursor-pointer">
                   {"Don't have an account?"}

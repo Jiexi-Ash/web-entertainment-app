@@ -1,7 +1,5 @@
 import { useState } from "react";
 import Image from "next/image";
-
-import BookmarkIcon from "public/assets/icon-bookmark-empty.svg";
 import PlayIcon from "public/assets/icon-play.svg";
 import BookmarkIconFull from "public/assets/icon-bookmark-full.svg";
 import BookmarkIconEmpty from "public/assets/icon-bookmark-empty.svg";

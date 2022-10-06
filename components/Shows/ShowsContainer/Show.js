@@ -6,24 +6,26 @@ import PlayIcon from "public/assets/icon-play.svg";
 import TvIcon from "public/assets/icon-category-tv.svg";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import axios from "axios";
+import { useDispatch } from "react-redux";
 
-function Show({ show = {} }) {
-  const router = useRouter();
+function Show({ show = {}, handleBookmark, type }) {
   const [currentShow, setCurrentShow] = useState(show);
 
   const isMovie = currentShow.category === "Movie";
   const isTv = currentShow.category === "TV Series";
 
-  const handleBookmark = async () => {
-    const response = await axios.patch("/api/shows/bookmark", {
-      showID: show._id,
-    });
+  const handleClick = async () => {
+    if (type === "toggle") {
+      const getShow = await handleBookmark(show._id);
 
-    if (response.data) {
-      setCurrentShow(response.data);
+      getShow ? setCurrentShow(getShow) : setCurrentShow(show);
+    }
+
+    if (type === "remove") {
+      handleBookmark(show._id);
     }
   };
+
   return (
     <div className="w-full cursor-pointer">
       <div className="relative  max-w-[164px] h-[110px] group md:max-w-[220px] md:h-[192px] lg:max-w-[280px] lg:h-[174px] transition-all duration-200 ">
@@ -61,7 +63,7 @@ function Show({ show = {} }) {
 
         <div
           className="absolute top-2 right-2 w-8 z-30  h-8 mx-auto bg-darkBlue/50 rounded-full"
-          onClick={handleBookmark}
+          onClick={handleClick}
         >
           {currentShow.isBookmarked ? (
             <BookmarkIconFull className="w-8 h-8 m-2.5 text-white" />
